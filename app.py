@@ -51,7 +51,7 @@ app.layout = html.Div([
 		children=[
 			# Date picker
 			html.Div(
-				className="two columns", 
+				className="three columns", 
 				children=[
 					dcc.Markdown(d("""
 						#### Select date
@@ -88,7 +88,7 @@ app.layout = html.Div([
 			),
 			# State picker
 			html.Div(
-				className="two columns",
+				className="three columns",
 				children=[
 					dcc.Markdown(d("""
 						#### Select State
@@ -105,11 +105,10 @@ app.layout = html.Div([
 			),
 			# Location picker
 			html.Div(
-				className="five columns",
+				className="four columns",
 				children=[
 					dcc.Markdown(d("""
 						#### High Risk Locations
-						List locations with a possible COVID infection. Spread will be simulated from these locations.
 						""")),
 					dcc.Dropdown(
 						id='locations',
@@ -117,6 +116,10 @@ app.layout = html.Div([
 						value= [],
 						multi=True
 					),
+					dcc.Markdown(d("""
+						List locations with a possible COVID infection. Spread will be simulated from these locations. 
+						When no locations are selected, a general risk estimate will be shown.
+						""")),
 					dcc.Checklist(id='select-all-from-dropdown',
 						options=[{'label': 'Select All', 'value': 1}], value=[]),
 					html.Div(id='show-locations'),
@@ -140,6 +143,9 @@ app.layout = html.Div([
 			html.Div(
 				className="eight columns",
 				children=[
+					dcc.Markdown(d("""
+						### Risk Map:
+						""")),
 					dcc.Graph(id="choropleth", 
 						figure= px.choropleth_mapbox([], geojson={}, 
 							locations=[1],  
@@ -154,7 +160,7 @@ app.layout = html.Div([
 					dcc.Markdown(d("""
 						### Highest Risk Areas:
 						""")),
-					html.Div(id = 'high_risk_areas')
+					dcc.Graph(id = 'high_risk_areas')
 				]
 
 			),
@@ -185,11 +191,11 @@ app.layout = html.Div([
 @app.callback(Output('show-locations', 'children'), Input('locations', 'value'), State('select-all-from-dropdown', 'value'))
 def display_locations(values, all_option):
 	if len(values)==0:
-		return "No locations selected, will show generalized risk estimate."
+		return None #"No locations selected, will show generalized risk estimate."
 	if all_option != []:
 		if all_option[0] == 1:
-			return "All possible locations selected, which is pretty much the same thing as selected no locations."
-	return "Selected %d locations. Risk map will be estimated starting from these locations." % len(values)
+			return "All possible locations selected, which is pretty much the same thing as selecting no locations."
+	return None # "Selected %d locations. Risk map will be estimated starting from these locations." % len(values)
 	# return ", ".join(values)
 
 
@@ -290,14 +296,22 @@ def update_choropleth(risk_estimate, state):
 
 # High risk location callback
 import re
-@app.callback(Output('high_risk_areas', 'children'), Input('risk_estimate_variable', 'children'))
+@app.callback(Output('high_risk_areas', 'figure'), Input('risk_estimate_variable', 'children'))
 def update_high_risk_areas(risk_estimate):
 	if risk_estimate:
 		risk_estimate = json.loads(risk_estimate)
 		risk_estimate = {int(k):v for k,v in risk_estimate.items()}
-		content = [lga_name_map.get(c, 'Error') + " %.2f" % r for c,r in sorted(risk_estimate.items(), key = lambda x:x[1], reverse = True) ][:10]
-		md = dcc.Markdown( "\n \n".join(content) ),
-		return md
+
+		top_risk_tuples = list(sorted(risk_estimate.items(), key=lambda x: x[1]))[-10:]
+		y = [lga_name_map.get(n, 'Error') for n, r in top_risk_tuples]
+		x = [r for n, r in top_risk_tuples]
+		fig = go.Figure(data=[go.Bar(x=x, y=y, orientation='h',
+                               marker=dict(color=x, cmin=0, colorscale='reds'))])
+		fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
+		# content = [lga_name_map.get(c, 'Error') + " %.2f" % r for c,r in sorted(risk_estimate.items(), key = lambda x:x[1], reverse = True) ][:10]
+		# md = dcc.Markdown( "\n \n".join(content) ),
+		return fig
 
 
 # Download CSV on Button Press
