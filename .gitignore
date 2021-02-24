@@ -1,6 +1,7 @@
 # Project Specific
 server_credentials.json
 .DS_Store
+data/LGA.geojson
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
