@@ -9,7 +9,7 @@ from datetime import *
 fake_data = pd.read_csv('data/FB_sample_data.csv')
 fake = False  # Use when debugging avoid calling the server constantly.
 
-import pyodbc
+import pyodbc, json
 with open('server_credentials.json', 'r') as f:
 	creds = json.load(f)
 
