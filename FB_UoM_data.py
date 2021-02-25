@@ -14,6 +14,21 @@ with open('server_credentials.json', 'r') as f:
 	creds = json.load(f)
 
 def get_fb_data(date, time, region):
+	"""Collects Origin-Destination flow dataframe from UMelb SQL server.
+
+    Extended description of function.
+
+    Args:
+        date (str): Date string in '%Y-%M-%d' (e.g. "2021-01-01")
+        time (int): Choice of time slice between 0000, 0600, 1200. Leading zeros are added automatically.
+		region (str): Abbreviation of state (e.g. "SA" or "VIC")
+
+    Returns:
+        pandas.DataFrame: A dataframe of origin-destination flows in a long format. 
+			Columns are LGA19_source, LGA19_target and n_trips.
+    """
+
+
 	if fake:  # Use when debugging avoid calling the server constantly.
 		print('Getting fake data')
 		date = datetime.strptime(date, '%Y-%M-%d').strftime('%-d/%-M/%y')
@@ -33,6 +48,17 @@ def get_fb_data(date, time, region):
 ######################################################################################################################################################################
 
 def get_fb_risk(ODflows, locations, state):
+	"""The function used to calculate risk based on the origin destination matrix of flows.
+
+    Args:
+        ODflows (pandas.Dataframe): An origin-destination dataframe with counts of individuals moving from one LGA region to another. 
+        locations (list): A list of LGA locations (as int's) that the outbreak simulation should be started from.
+		state (int): A value [0,7] that can be used to specify what state is being examined.
+
+    Returns:
+        dict: A dictionary of { LGA code : risk estimate } pairs which will be plotted.
+
+    """
 	print('Risk locations:', locations)
 
 	# Keep only flows that are within state
@@ -55,11 +81,6 @@ def get_fb_risk(ODflows, locations, state):
 		risk_vector = ODmatrix.sum(axis=0)
 		risk_vector = risk_vector / risk_vector.sum()
 		risk_vector = dict(zip(ODmatrix.index, risk_vector))
-	elif len(locations) == 1:
-		# Normalise by row sums
-		ODmatrix = ODmatrix.div(ODmatrix.sum(axis=1), axis=0)
-		risk_vector = ODmatrix.iloc[locations[0], :]
-		risk_vector = risk_vector / risk_vector.sum()
 	else:
 		p = np.array([1 if loc in locations else 0 for loc in ODmatrix.index])  # Prevalence vector
 		risk_vector = np.matmul(ODmatrix.to_numpy(), p)
