@@ -100,7 +100,10 @@ app.layout = html.Div([
 						searchable=False
 						# labelStyle={'display': 'inline-block'}
 					),
-					# html.Div(id = "show-selected_times")
+					# dcc.Markdown(d("""
+					# 	Mobility data is only considered within-state. 
+					# 	""")),
+					html.Div(id = "show-selected_times")
 				]
 			),
 			# Location picker
@@ -116,10 +119,6 @@ app.layout = html.Div([
 						value= [],
 						multi=True
 					),
-					dcc.Markdown(d("""
-						List locations with a possible COVID infection. Spread will be simulated from these locations. 
-						When no locations are selected, a general risk estimate will be shown.
-						""")),
 					dcc.Checklist(id='select-all-from-dropdown',
 						options=[{'label': 'Select All', 'value': 1}], value=[]),
 					html.Div(id='show-locations'),
@@ -127,6 +126,9 @@ app.layout = html.Div([
 			)
 		]
 	),
+	dcc.Markdown(d("""
+		Mobility data from Facebook is collected to quantify the movement of individuals between local government areas (LGA). A risk estimate is generated based on the locations included in High Risk Locations. Risk spreads from these locations into other LGAs where people often travel to after visiting the high risk locations. When no locations are selected, a general risk estimate will be shown.		
+		""")),
 	html.Hr(),
 	# Submit button
 	html.Div(
