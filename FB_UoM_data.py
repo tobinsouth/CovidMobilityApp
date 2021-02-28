@@ -75,7 +75,7 @@ def get_fb_risk(ODflows, locations, state):
 	ODmatrix = ODmatrix.fillna(0) 
 
 	# Option set diagonal to 0 
-	np.fill_diagonal(ODmatrix.values, 0)
+	# np.fill_diagonal(ODmatrix.values, 0)
 
 	if len(locations) == 0:
 		risk_vector = ODmatrix.sum(axis=0)
