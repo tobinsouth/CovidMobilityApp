@@ -175,10 +175,8 @@ app.layout = html.Div([
 			html.Button("Download Flow Matrix as CSV", id="download_button")
 			]
 	),
-	# Hidden div inside the app that stores the downloaded flow matrix
-	html.Div(id='downloaded_data', style={'display': 'none'}),
 
-	# Hidden div inside the app that stores the intermediate value
+	# Hidden div inside the app that stores the risk values
 	html.Div(id='risk_estimate_variable', style={'display': 'none'}),
 
 	# Element to allow for file download
@@ -219,37 +217,23 @@ def update_possible_state_locations(state):
 	return [{'label': v, 'value': k} for k, v in lga_name_map.items() if k // 10000 == state]
 
 
-# Get new data on submit
-@app.callback(Output('downloaded_data', 'children'), Input('submit_button', 'n_clicks'),
-	state =[State('date_picker', 'date'), State('time_option', 'value'), State('state', 'value')])
-def collect_flow_data(n_clicks, date, time_option, state): 
-	print('Running collections')
-	# print(date)
+# Get new data & run risk estimate on submit
+@app.callback(Output('risk_estimate_variable', 'children'), Input('submit_button', 'n_clicks'),
+              state=[State('date_picker', 'date'), State('time_option', 'value'), State('state', 'value'), 
+			  State('locations', 'value')])
+def run_risk_estimate(n_clicks, date, time_option, state, locations): 
 	ODflows = get_fb_data(date, time_option, state_acronym_map[state])
-	# print(ODflows.head())
-	return ODflows.to_json(date_format='iso', orient='split')
-
-
-# Run risk estimate after new data
-@app.callback(Output('risk_estimate_variable', 'children'), Input('downloaded_data', 'children'), 
-		state = [State('locations','value'), State('state', 'value')])
-def run_risk_estimate(downloaded_data, locations, state): 
-	# print(downloaded_data)
-	if downloaded_data:
-		ODflows = pd.read_json(downloaded_data, orient='split')
-		risk_estimate = get_fb_risk(ODflows, locations, state) 
-		return json.dumps(risk_estimate)
-	print('No downloaded data')
-
+	risk_estimate = get_fb_risk(ODflows, locations, state) 
+	return json.dumps(risk_estimate)
 
 # Update Choropleth
 import geopandas
 
-full_geo_df = geopandas.read_file("data/LGA.geojson")
+full_geo_df = geopandas.read_file("data/LGA_small_01.geojson")
 full_geo_df.id = pd.to_numeric(full_geo_df.id)
-full_geo_df.LGA_CODE_2020 = pd.to_numeric(full_geo_df.LGA_CODE_2020)
-full_geo_df.AREA_ALBERS_SQKM = pd.to_numeric(full_geo_df.AREA_ALBERS_SQKM)
-full_geo_df.STATE_CODE_2016 = pd.to_numeric(full_geo_df.STATE_CODE_2016)
+full_geo_df.LGA_CODE19 = pd.to_numeric(full_geo_df.LGA_CODE19)
+full_geo_df.AREASQKM19 = pd.to_numeric(full_geo_df.AREASQKM19)
+full_geo_df.STE_CODE16 = pd.to_numeric(full_geo_df.STE_CODE16)
 full_geo_df = full_geo_df.set_index('id')
 
 cbd_lat_longs = {
@@ -262,8 +246,8 @@ cbd_lat_longs = {
 	7: {"lat": -12.4634, "lon": 130.8456}
 }
 
-@app.callback(Output('choropleth', 'figure'), Input('risk_estimate_variable', 'children'), state = State('state', 'value'))
-def update_choropleth(risk_estimate, state):
+@app.callback(Output('choropleth', 'figure'), Input('risk_estimate_variable', 'children'), state = [State('state', 'value'), State('locations','value')])
+def update_choropleth(risk_estimate, state, locations):
 	if risk_estimate:
 		# Load in risk estimate
 		risk_estimate = json.loads(risk_estimate)
@@ -271,8 +255,8 @@ def update_choropleth(risk_estimate, state):
 
 		
 		# Loading in state geopandas 
-		state_geo_df = full_geo_df[full_geo_df.STATE_CODE_2016 == state]
-		state_geo_df = state_geo_df[state_geo_df.LGA_CODE_2020.apply(
+		state_geo_df = full_geo_df[full_geo_df.STE_CODE16 == state]
+		state_geo_df = state_geo_df[state_geo_df.LGA_CODE19.apply(
 		    lambda x: x in risk_estimate)]
 		state_geo_df['Risk Potential'] = [risk_estimate[code]
                                     for code in state_geo_df.index]
@@ -283,17 +267,22 @@ def update_choropleth(risk_estimate, state):
 							geojson=state_geo_df.geometry, 
 							locations=state_geo_df.index, 
                              color='Risk Potential',
-							hover_name='LGA_NAME_2020',
+							hover_name='LGA_NAME19',
 							color_continuous_scale='reds',
 							center=cbd_lat_longs[state],
 							mapbox_style="carto-positron",
 							zoom=8, opacity=0.8)
 		fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
 		return fig
 	else:
+		return None
 		print('No risk estimate')
-		return px.choropleth_mapbox([], geojson={}, locations=[1],  
-				center=cbd_lat_longs[state], mapbox_style= "carto-positron", zoom=8)
+		fig = px.choropleth_mapbox([], geojson={}, locations=[1],  
+                              center=cbd_lat_longs[state], mapbox_style="carto-positron", 
+							  zoom=8)
+		fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+		return fig
 
 
 # High risk location callback
@@ -314,18 +303,29 @@ def update_high_risk_areas(risk_estimate):
 		# content = [lga_name_map.get(c, 'Error') + " %.2f" % r for c,r in sorted(risk_estimate.items(), key = lambda x:x[1], reverse = True) ][:10]
 		# md = dcc.Markdown( "\n \n".join(content) ),
 		return fig
+	else:
+		return None
 
 
 # Download CSV on Button Press
-@app.callback( Output("download_div", "data"), [Input("download_button", "n_clicks")], 
-	state=[State('downloaded_data', 'children')])
-def generate_csv(n_clicks, jsonified_dataframe):
-	if jsonified_dataframe:
-		print(n_clicks)
-		flow_data_long = pd.read_json(jsonified_dataframe, orient='split')
-		print(flow_data_long.head())
-		return send_data_frame(flow_data_long.to_csv, filename="flow_data_long.csv")
+@app.callback( Output("download_div", "data"), Input("download_button", "n_clicks"), 
+               state=[State('risk_estimate_variable', 'children'), State('state', 'value')])
+def generate_csv(n_clicks, risk_estimate_variable, state):
+	if risk_estimate_variable:
+		risk_estimate = json.loads(risk_estimate)
+		risk_estimate = {int(k): v for k, v in risk_estimate.items()}
 
+		state_geo_df = full_geo_df[full_geo_df.STE_CODE16 == state]
+		state_geo_df = state_geo_df[state_geo_df.LGA_CODE19.apply(
+		    lambda x: x in risk_estimate)]
+		
+		state_geo_df['Risk Potential'] = [risk_estimate[code]
+                                    for code in state_geo_df.index]
+
+		state_geo_df = state_geo_df[["LGA_CODE19" "LGA_NAME19",
+                    "STE_NAME16", "AREASQKM19", 'Risk Potential']]
+
+		return send_data_frame(state_geo_df.to_csv, filename="Risk_by_LGA.csv")
 
 # Run
 if __name__ == '__main__':
