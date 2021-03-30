@@ -19,25 +19,15 @@ from dash_extensions.snippets import send_data_frame
 # Import FB UoM Data Collection
 from FB_UoM_data import *
 
-import logging, sys, os
-# logging.basicConfig(filename=here+'/temp/python.log', level=logging.INFO, 
-#                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
-# # os.chmod(LOG_FILENAME, stat.S_IRWXU | stat.S_IRWXG | stat.S_IRWXO);
-# logging.info('Server should be starting.')
-# logging.info('Python version and path' + sys.version)
-# # for p in sys.path:
-# #     logging.info(p)
-# os.chmod(here+'/temp/python.log', 0o777)
 
-print('Server should be starting')
-######################################################################################################################################################################
+##################################################################################################################################
 # This is the setup of the actual dash html interface
-######################################################################################################################################################################
+##################################################################################################################################
 
 # import the css template, and pass the css template into dash
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
-                requests_pathname_prefix='/coviddash/' )  # requests_pathname_prefix='/coviddash/',
+                requests_pathname_prefix='/coviddash/' ) 
 app.title = "COVID-19 Risk Map"
 
 # styles: for right side hover/click component
@@ -226,32 +216,9 @@ app.layout = html.Div([
 
 ])
 
-######################################################################################################################################################################
+############################################################################################################################
 # These callbacks are what will make everything interactive
-######################################################################################################################################################################
-
-# # Show selected locations
-# @app.callback(Output('show-locations', 'children'), Input('locations', 'value'), State('select-all-from-dropdown', 'value'))
-# def display_locations(values, all_option):
-# 	if len(values)==0:
-# 		return None #"No locations selected, will show generalized risk estimate."
-# 	if all_option != []:
-# 		if all_option[0] == 1:
-# 			return "All possible locations selected, which is pretty much the same thing as selecting no locations."
-# 	return None # "Selected %d locations. Risk map will be estimated starting from these locations." % len(values)
-# 	# return ", ".join(values)
-
-
-# # Select all possible starting locations.
-# @app.callback( Output('locations', 'value'),
-# 	[Input('select-all-from-dropdown', 'value')],
-# 	[State('locations', 'options'),
-# 	 State('locations', 'value')])
-# def select_all_locations(selected, options, values):
-# 	if selected != []:
-# 		if selected[0] == 1:
-# 			return [i['value'] for i in options]
-# 	return values
+############################################################################################################################
 
 # Update location list according to state
 @app.callback(Output('locations', 'options'),
@@ -261,42 +228,26 @@ def update_possible_state_locations(state):
 
 
 # Get new data & run risk estimate on submit
-@app.callback(Output('risk_estimate_variable', 'children'), Input('submit_button', 'n_clicks'),
-              state=[State('time_option', 'value'), State('state', 'value'), 
-			  State('locations', 'value'), Input('date_picker', 'start_date'), Input('date_picker', 'end_date')])
+@app.callback(Output('risk_estimate_variable', 'children'),Input('submit_button', 'n_clicks'), Input('time_option', 'value'), Input('state', 'value'), Input('locations', 'value'), Input('date_picker', 'start_date'), Input('date_picker', 'end_date'))
 def run_risk_estimate(n_clicks, time_option, state, locations, start_date, end_date): 
-	# if n_clicks:
-	import time
-	time.sleep(2)
-	ODflows = get_fb_data(time_option, state_acronym_map[state], start_date, end_date)
-	risk_estimate = get_fb_risk(ODflows, locations, state) 
-	return json.dumps(risk_estimate)
+	ctx = dash.callback_context
+	if not ctx.triggered:
+		ODflows = get_fb_data(time_option, state_acronym_map[state], start_date, end_date)
+		risk_estimate = get_fb_risk(ODflows, locations, state) 
+		return json.dumps(risk_estimate)
+	else:
+		change_prop_id = ctx.triggered[0]['prop_id'].split('.')[0]
+		if change_prop_id == 'submit_button':
+			ODflows = get_fb_data(time_option, state_acronym_map[state], start_date, end_date)
+			risk_estimate = get_fb_risk(ODflows, locations, state)
+			return json.dumps(risk_estimate)
+		else:
+			return -1
 
-
-
-# Update Choropleth
-import geopandas
-print('Reading in geopandas')
-full_geo_df = geopandas.read_file(here+"/data/LGA_small_02.geojson")
-full_geo_df.id = pd.to_numeric(full_geo_df.id)
-full_geo_df.LGA_CODE19 = pd.to_numeric(full_geo_df.LGA_CODE19)
-full_geo_df.AREASQKM19 = pd.to_numeric(full_geo_df.AREASQKM19)
-full_geo_df.STE_CODE16 = pd.to_numeric(full_geo_df.STE_CODE16)
-full_geo_df = full_geo_df.set_index('id')
-
-cbd_lat_longs = {
-	1: {"lat": -33.8708, "lon": 151.2073},
-	2: {"lat": -37.8136, "lon": 144.9631},
-	3: {"lat": -27.4698, "lon": 153.0251},
-	4: {"lat": -34.9285, "lon": 138.6007},
-	5: {"lat": -31.9505, "lon": 115.8605},
-	6: {"lat": -42.8821, "lon": 147.3272},
-	7: {"lat": -12.4634, "lon": 130.8456}
-}
 
 @app.callback(Output('choropleth', 'figure'), Input('risk_estimate_variable', 'children'), state = [State('state', 'value'), State('locations','value')])
 def update_choropleth(risk_estimate, state, locations):
-	if risk_estimate:
+	if risk_estimate and (risk_estimate != -1):
 		# Load in risk estimate
 		risk_estimate = json.loads(risk_estimate)
 		risk_estimate = {int(k):v for k,v in risk_estimate.items()}
@@ -325,19 +276,14 @@ def update_choropleth(risk_estimate, state, locations):
 		return fig
 
 	else:
-		print('No risk estimate')
-		fig = px.choropleth_mapbox([], geojson={}, locations=[1],  
-                              center=cbd_lat_longs[state], mapbox_style="carto-positron", 
-							  zoom=8)
-		fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-		return fig
+		return empty_graph
 
 
 # High risk location callback
 import re
 @app.callback(Output('high_risk_areas', 'figure'), Input('risk_estimate_variable', 'children'))
 def update_high_risk_areas(risk_estimate):
-	if risk_estimate:
+	if risk_estimate and (risk_estimate != -1):
 		risk_estimate = json.loads(risk_estimate)
 		risk_estimate = {int(k):v for k,v in risk_estimate.items()}
 
@@ -347,12 +293,8 @@ def update_high_risk_areas(risk_estimate):
 		fig = go.Figure(data=[go.Bar(x=x, y=y, orientation='h',
                                marker=dict(color=x, cmin=0, colorscale='reds'))])
 		fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-
-		# content = [lga_name_map.get(c, 'Error') + " %.2f" % r for c,r in sorted(risk_estimate.items(), key = lambda x:x[1], reverse = True) ][:10]
-		# md = dcc.Markdown( "\n \n".join(content) ),
 		return fig
 	else:
-		print('Showing empty high risk areas graph')
 		return empty_graph
 
 
@@ -377,9 +319,11 @@ def generate_csv(n_clicks, risk_estimate_variable, state):
 		return send_data_frame(state_geo_df.to_csv, filename="Risk_by_LGA.csv")
 
 
+# Run
+
+# print('A new Python instance is starting')
 server = app.server # the Flask app
 
-# Run
 if __name__ == '__main__':
-	app.run_server(debug=True)
+	app.run_server(debug=False)
 

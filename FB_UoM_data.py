@@ -1,17 +1,18 @@
+import geopandas
 import pickle
 import pandas as pd, numpy as np
 from datetime import *
 
-here = '/home/tobin/COVID-Risk-App'
-here = '/Users/tobin/Dropbox/MPhil/Projects/COVID Risk Mapping/Bandicoot Code'
+here = '/home/tobin/COVID-Risk-App' # WSGI likes it when we set the absolute path
+# here = '.'
 
 
-######################################################################################################################################################################
+###############################################################################################################################
 # Loading in Facebook Data
-######################################################################################################################################################################
+###############################################################################################################################
 
 fake_data = pd.read_csv(here+'/data/FB_sample_data.csv')
-fake = True  # Use when debugging avoid calling the server constantly.
+fake = False  # Use when debugging to avoid calling the server constantly.
 
 import pyodbc, json
 with open(here+'/server_credentials.json', 'r') as f:
@@ -54,9 +55,9 @@ def get_fb_data(time, region, start_date, end_date):
 
 	return response_dataframe
 
-######################################################################################################################################################################
+##############################################################################################################################
 # Calculating Risk
-######################################################################################################################################################################
+##############################################################################################################################
 
 def get_fb_risk(ODflows, locations, state):
 	"""The function used to calculate risk based on the origin destination matrix of flows.
@@ -137,7 +138,7 @@ empty_graph = {
         },
         "annotations": [
             {
-                "text": "Loading...",
+                "text": "Waiting for risk estimate...",
                 "xref": "paper",
                 "yref": "paper",
                 "showarrow": False,
@@ -147,4 +148,24 @@ empty_graph = {
             }
         ]
     }
+}
+
+
+# Update Choropleth
+# print('Reading in geopandas')
+full_geo_df = geopandas.read_file(here+"/data/LGA_small_02.geojson")
+full_geo_df.id = pd.to_numeric(full_geo_df.id)
+full_geo_df.LGA_CODE19 = pd.to_numeric(full_geo_df.LGA_CODE19)
+full_geo_df.AREASQKM19 = pd.to_numeric(full_geo_df.AREASQKM19)
+full_geo_df.STE_CODE16 = pd.to_numeric(full_geo_df.STE_CODE16)
+full_geo_df = full_geo_df.set_index('id')
+
+cbd_lat_longs = {
+	1: {"lat": -33.8708, "lon": 151.2073},
+	2: {"lat": -37.8136, "lon": 144.9631},
+	3: {"lat": -27.4698, "lon": 153.0251},
+	4: {"lat": -34.9285, "lon": 138.6007},
+	5: {"lat": -31.9505, "lon": 115.8605},
+	6: {"lat": -42.8821, "lon": 147.3272},
+	7: {"lat": -12.4634, "lon": 130.8456}
 }
