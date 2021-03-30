@@ -42,9 +42,10 @@ def get_fb_data(time, region, start_date, end_date):
 		ODflows = grouped.groupby('region').get_group(region)
 		return ODflows
 	else:
+		time_str = '' if time == '*' else " AND time='%s'" % time
 		with pyodbc.connect('DRIVER='+creds["driver"]+';SERVER='+creds["server"]+';DATABASE='+creds["database"]+';UID='+creds["username"]+';PWD='+ creds["password"]) as conn:
-			query = "SELECT * FROM dbo.FB_LGA19_OD WHERE date>='%s' AND date<='%s' AND region = '%s' AND time=%s" % (
-				start_date, end_date, region, time)
+			query = "SELECT * FROM dbo.FB_LGA19_OD WHERE date>='%s' AND date<='%s' AND region = '%s'%s" % (
+				start_date, end_date, region, time_str)
 			response_dataframe = pd.read_sql_query(query, conn)
 			# print('Query from database: ', start_date, end_date,  time, region, '; Result length = ', len(response_dataframe))
 			response_dataframe = response_dataframe[~response_dataframe.duplicated()]
