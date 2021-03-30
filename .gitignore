@@ -2,6 +2,7 @@
 server_credentials.json
 .DS_Store
 data/LGA.geojson
+data/FB_sample_data.csv
 development-enviroment
 
 .vscode
