@@ -30,15 +30,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
                 requests_pathname_prefix='/coviddash/' ) 
 app.title = "COVID-19 Risk Map"
 
-# styles: for right side hover/click component
-styles = {
-	'pre': {
-		'border': 'thin lightgrey solid',
-		'overflowX': 'scroll'
-	}
-}
-
-app.layout = html.Div([
+app.layout = html.Div(style={'margin':20}, children = [
 	# Title & Explainer
 	html.Div([html.H1("COVID-19 Risk Mapping")], className="row",  style={'textAlign': "center"}),
 	html.Div(className="row", style={'textAlign': "justify", 'padding-right': '30px', 'padding-left': '30px'},
@@ -93,9 +85,8 @@ app.layout = html.Div([
 							{'label': 'Night', 'value': '1600'},
 							{'label': 'All', 'value': '*'}
 						],
-						value=0,
+						value='0000',
 						searchable=False
-						# labelStyle={'display': 'inline-block'}
 					),
 				]
 			),
@@ -111,7 +102,6 @@ app.layout = html.Div([
 						options= [ {'label':v, 'value':k} for k,v in state_fullname_map.items()],
 						value=1,
 						searchable=False
-						# labelStyle={'display': 'inline-block'}
 					),
 				]
 			),
@@ -126,7 +116,8 @@ app.layout = html.Div([
 						id='locations',
 						options= [ {'label':v, 'value':k} for k,v in lga_name_map.items() if k // 10000 == 1],
 						value= [],
-						multi=True
+						multi=True,
+						placeholder="Optional -  Select Outbreak Startpoints",
 					),
 					# dcc.Checklist(id='select-all-from-dropdown',
 					# 	options=[{'label': 'Select All', 'value': 1}], value=[]),
@@ -148,7 +139,8 @@ app.layout = html.Div([
 				html.Div(
 					className="row",  style={'textAlign': "center"}, 
 					children=[
-						html.Button("Create Risk Estimate", id="submit_button")
+						html.Button("Create Risk Estimate", id="submit_button", style={
+						            'width': '250px', 'height': '60px', 'textAlign': "center", 'horizontalAlign':'center'})
 						]
 				),
 				# Hidden div inside the app that stores the risk values

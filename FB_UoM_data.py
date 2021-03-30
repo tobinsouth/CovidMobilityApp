@@ -35,9 +35,11 @@ def get_fb_data(time, region, start_date, end_date):
 
 	if fake:  # Use when debugging avoid calling the server constantly.
 		print('Getting fake data')
-		date = datetime.strptime(start_date, '%Y-%M-%d').strftime('%-d/%-M/%y')
-		grouped = fake_data.groupby(['date','time', 'region'])
-		ODflows = grouped.get_group((date, time, region))
+		import time
+		time.sleep(2)
+		# date = datetime.strptime(start_date, '%Y-%M-%d').strftime('%-d/%-M/%y')
+		grouped = fake_data.groupby(['LGA19_source', 'LGA19_target', 'region']).sum().reset_index()
+		ODflows = grouped.groupby('region').get_group(region)
 		return ODflows
 	else:
 		with pyodbc.connect('DRIVER='+creds["driver"]+';SERVER='+creds["server"]+';DATABASE='+creds["database"]+';UID='+creds["username"]+';PWD='+ creds["password"]) as conn:
