@@ -1,1 +1,0 @@
-The file LGA.geojson is too large (151M) and hence is not uploaded. Contact maintainer for geojson file.
