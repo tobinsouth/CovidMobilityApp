@@ -1,0 +1,12 @@
+dash
+dash-renderer
+dash-html-components
+dash-core-components
+plotly
+gunicorn
+textwrap
+dash_extensions
+geopandas
+pandas
+numpy
+pyodbc
