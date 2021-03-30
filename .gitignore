@@ -4,6 +4,8 @@ server_credentials.json
 data/LGA.geojson
 development-enviroment
 
+.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
