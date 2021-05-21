@@ -162,13 +162,3 @@ full_geo_df.LGA_CODE19 = pd.to_numeric(full_geo_df.LGA_CODE19)
 full_geo_df.AREASQKM19 = pd.to_numeric(full_geo_df.AREASQKM19)
 full_geo_df.STE_CODE16 = pd.to_numeric(full_geo_df.STE_CODE16)
 full_geo_df = full_geo_df.set_index('id')
-
-cbd_lat_longs = {
-	1: {"lat": -33.8708, "lon": 151.2073},
-	2: {"lat": -37.8136, "lon": 144.9631},
-	3: {"lat": -27.4698, "lon": 153.0251},
-	4: {"lat": -34.9285, "lon": 138.6007},
-	5: {"lat": -31.9505, "lon": 115.8605},
-	6: {"lat": -42.8821, "lon": 147.3272},
-	7: {"lat": -12.4634, "lon": 130.8456}
-}

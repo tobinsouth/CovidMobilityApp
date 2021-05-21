@@ -28,11 +28,11 @@ from FB_UoM_data import *
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
                 requests_pathname_prefix='/coviddash/' ) 
-app.title = "COVID-19 Risk Map"
+app.title = "COVID-19 Spatial Risk Map"
 
 app.layout = html.Div(style={'margin':20}, children = [
 	# Title & Explainer
-	html.Div([html.H1("COVID-19 Risk Mapping")], className="row",  style={'textAlign': "center"}),
+	html.Div([html.H1("COVID-19 Spatial Risk Mapping")], className="row",  style={'textAlign': "center"}),
 	html.Div(className="row", style={'textAlign': "justify", 'padding-right': '30px', 'padding-left': '30px'},
 		children = dcc.Markdown(d(
 		"""
@@ -45,12 +45,16 @@ app.layout = html.Div(style={'margin':20}, children = [
 		))),
 	html.Hr(),
 	# Input selectors
-	html.Div(
-		className="row border border-secondary", style={'textAlign': "center"}, 
+	html.Div(className="row border border-secondary", style={'textAlign': "center"}, children=
+			dcc.Markdown(d("""
+						Select a set of dates and times of day to collect mobility data over. This data is used to create a network of movement between local government areas to help examine the risk of spread.
+						""")),
+	),
+	html.Div(className="row border border-secondary", style={'textAlign': "center", 'padding-right': '30px', 'padding-left': '30px'},
 		children=[
 			# Date picker
 			html.Div(
-				className="three columns", 
+				className="four columns", 
 				children=[
 					dcc.Markdown(d("""
 						#### Select Dates
@@ -58,9 +62,11 @@ app.layout = html.Div(style={'margin':20}, children = [
 					dcc.DatePickerRange(
                         id='date_picker',
                         min_date_allowed=date(2020, 5, 1),
-                        max_date_allowed=date.today(),
-                        start_date = date(2021, 1, 1),
-                        end_date= date(2021, 1, 10)
+                        max_date_allowed=date.today()-timedelta(1),
+                        start_date = date.today()-timedelta(31),
+                        end_date= date.today()-timedelta(24),
+						display_format='DD/MM/YY',
+						minimum_nights=0,
                     ),
 					# dcc.DatePickerSingle(
 					# 	id='date_picker',
@@ -72,7 +78,7 @@ app.layout = html.Div(style={'margin':20}, children = [
 			),
 			# Time picker
 			html.Div(
-				className="two columns",
+				className="four columns",
 				children=[
 					dcc.Markdown(d("""
 						#### Select Times
@@ -85,14 +91,14 @@ app.layout = html.Div(style={'margin':20}, children = [
 							{'label': 'Night', 'value': '1600'},
 							{'label': 'All', 'value': '*'}
 						],
-						value='0000',
-						searchable=False
+						value='*',
+						searchable=False,
 					),
 				]
 			),
 			# State picker
 			html.Div(
-				className="three columns",
+				className="four columns",
 				children=[
 					dcc.Markdown(d("""
 						#### Select State
@@ -105,9 +111,18 @@ app.layout = html.Div(style={'margin':20}, children = [
 					),
 				]
 			),
-			# Location picker
+		]
+	),
+	html.Hr(),
+	html.Div(className="row border border-secondary", style={'textAlign': "center"}, children=
+			dcc.Markdown(d("""
+						Optionally, select locations to examine how people travel out of an area or set of areas. If no locations are selected, a general mobility risk map will be shown.
+						""")),
+	),
+	html.Div(className="row border border-secondary", style={'textAlign': "center", 'padding-right': '30px', 'padding-left': '30px'},  children = [
+		# Location picker
 			html.Div(
-				className="four columns",
+				className="eight columns",
 				children=[
 					dcc.Markdown(d("""
 						#### Outbreak Centres
@@ -119,16 +134,20 @@ app.layout = html.Div(style={'margin':20}, children = [
 						multi=True,
 						placeholder="Optional -  Select Outbreak Startpoints",
 					),
-					# dcc.Checklist(id='select-all-from-dropdown',
-					# 	options=[{'label': 'Select All', 'value': 1}], value=[]),
-					# html.Div(id='show-locations'),
 				]
-			)
-		]
-	),
-	html.Div(className="row"),
+			),
+			html.Div(className="four columns",  children = [	
+				dcc.Markdown(d("""
+						#### Display Options
+						""")),
+				dcc.Checklist(id='show_outbreak_centres',
+							options=[{'label': 'Exclude outbreak startpoints from display', 'value': 1}], value=[], className="twelve columns"),
+				dcc.Checklist(id='show_low_flow',
+							options=[{'label': 'Exclude very low risk areas from display', 'value': 1}], value=[], className="twelve columns"),
+			]),
+	]),
 	dcc.Markdown(d("""
-			After selecting the desired inputs, click the Create Risk Estimate button to begin calculation. This may take several seconds to process and display depending on your hardware.
+			After selecting the desired inputs, **click the Create Risk Estimate button** to begin calculation. This may take several seconds to process and display depending on your hardware.
 		"""), style={'textAlign': "center", "margin-top": "15px"}),
 	html.Hr(),
 	# Submit button
@@ -153,6 +172,7 @@ app.layout = html.Div(style={'margin':20}, children = [
 	dcc.Loading(
             id="loading-bar-figures",
             type="default",
+			color='#e0a12b',
 			children=[
 				html.Div(
 					className="row",
@@ -161,7 +181,7 @@ app.layout = html.Div(style={'margin':20}, children = [
 							className="eight columns",
 							children=[
 								dcc.Markdown(d("""
-									### Risk Map:
+									### Relative Spatial Risk Map:
 									""")),
 								dcc.Graph(id="choropleth", figure=empty_graph)
 							]
@@ -220,7 +240,7 @@ def update_possible_state_locations(state):
 
 
 # Get new data & run risk estimate on submit
-@app.callback(Output('risk_estimate_variable', 'children'),Input('submit_button', 'n_clicks'), Input('time_option', 'value'), Input('state', 'value'), Input('locations', 'value'), Input('date_picker', 'start_date'), Input('date_picker', 'end_date'))
+@app.callback(Output('risk_estimate_variable', 'children'), Input('submit_button', 'n_clicks'), Input('time_option', 'value'), Input('state', 'value'), Input('locations', 'value'), Input('date_picker', 'start_date'), Input('date_picker', 'end_date'))
 def run_risk_estimate(n_clicks, time_option, state, locations, start_date, end_date): 
 	ctx = dash.callback_context
 	if not ctx.triggered:
@@ -237,32 +257,62 @@ def run_risk_estimate(n_clicks, time_option, state, locations, start_date, end_d
 			return -1
 
 
-@app.callback(Output('choropleth', 'figure'), Input('risk_estimate_variable', 'children'), state = [State('state', 'value'), State('locations','value')])
-def update_choropleth(risk_estimate, state, locations):
+@app.callback(Output('choropleth', 'figure'), Input('risk_estimate_variable', 'children'), Input('show_outbreak_centres', 'value'), Input('show_low_flow', 'value'), state = [State('state', 'value'), State('locations','value')])
+def update_choropleth(risk_estimate, show_outbreak_centres, show_low_flow, state, locations):
 	if risk_estimate and (risk_estimate != -1):
 		# Load in risk estimate
 		risk_estimate = json.loads(risk_estimate)
-		risk_estimate = {int(k):v for k,v in risk_estimate.items()}
+		risk_estimate = {int(k):v for k,v in risk_estimate.items()}# Fix keys
 
-		
+		# Removing outbreak centres if desired
+		if len(show_outbreak_centres)!=0 and len(locations) > 0:
+			risk_estimate = {k:v for k,v in risk_estimate.items() if int(k) not in locations}
+
+		# Removing 0 flow areas
+		if len(show_low_flow) != 0:
+			risk_estimate = {k:v for k,v in risk_estimate.items() if v != 0}
+
+		# Log transform for colourscale
+		risk_estimate_log = {k:np.log10(v+10**(-10)) for k,v in risk_estimate.items()}
+
 		# Loading in state geopandas 
 		state_geo_df = full_geo_df[full_geo_df.STE_CODE16 == state]
 		state_geo_df = state_geo_df[state_geo_df.LGA_CODE19.apply(
 		    lambda x: x in risk_estimate)]
-		state_geo_df['Risk Potential'] = [risk_estimate[code]
-                                    for code in state_geo_df.index]
-		print('Making choropleth with %d rows of LGA\'s' % len(state_geo_df))
+		state_geo_df['Log10 Risk Potential'] = [risk_estimate_log[code] for code in state_geo_df.index]
+		state_geo_df['Relative Risk Potential'] = [risk_estimate[code] for code in state_geo_df.index]
 
 		# Create plot
 		fig = px.choropleth_mapbox(state_geo_df,
 							geojson=state_geo_df.geometry, 
 							locations=state_geo_df.index, 
-                             color='Risk Potential',
 							hover_name='LGA_NAME19',
+                            color='Log10 Risk Potential',
 							color_continuous_scale='reds',
 							center=cbd_lat_longs[state],
 							mapbox_style="carto-positron",
 							zoom=8, opacity=0.8)
+
+		customdata  = np.stack([state_geo_df[col] for col in ["Relative Risk Potential", "LGA_NAME19", "AREASQKM19", "Population", "Median Age"]], axis=-1)
+		fig.update_traces(customdata = customdata, hovertemplate='<b>%{customdata[1]}</b> <br>'+
+										'Relative Risk Potential: %{customdata[0]} <br>'+
+										'Population: %{customdata[3]} <br>'+
+										'Median Age: %{customdata[4]} <br>'+
+										'Area (km^2): %{customdata[2]} <br>')
+
+		min_vals = min(risk_estimate_log.values())
+		max_vals = max(risk_estimate_log.values())
+		tickvals = [round(n, 4) for n in np.logspace(min_vals, max_vals, num = 6)]
+		ticktext = [str(v) for v in tickvals]
+		tickvals = [np.log10(v+10**(-10)) for v in tickvals]
+
+		coloraxis = fig['layout']['coloraxis']
+		coloraxis['colorbar']['tickvals'] = tickvals
+		coloraxis['colorbar']['ticktext'] = ticktext
+		coloraxis['colorbar']['title']['text'] = "Relative Risk\nPotential"
+
+		fig.update_layout(coloraxis=coloraxis)
+
 		fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
 		return fig
@@ -272,19 +322,31 @@ def update_choropleth(risk_estimate, state, locations):
 
 
 # High risk location callback
-import re
-@app.callback(Output('high_risk_areas', 'figure'), Input('risk_estimate_variable', 'children'))
-def update_high_risk_areas(risk_estimate):
+@app.callback(Output('high_risk_areas', 'figure'), Input('risk_estimate_variable', 'children'), Input('show_outbreak_centres', 'value'), Input('show_low_flow', 'value'),state = [State('state', 'value'), State('locations','value')]) 
+def update_high_risk_areas(risk_estimate, show_outbreak_centres, show_low_flow, state, locations):
 	if risk_estimate and (risk_estimate != -1):
 		risk_estimate = json.loads(risk_estimate)
-		risk_estimate = {int(k):v for k,v in risk_estimate.items()}
+		risk_estimate = {int(k):v for k,v in risk_estimate.items()}# Fix keys
 
+		# Removing outbreak centres if desired
+		if len(show_outbreak_centres)!=0 and len(locations) > 0:
+			risk_estimate = {k:v for k,v in risk_estimate.items() if k not in locations}
+
+		# Removing 0 flow areas
+		if len(show_low_flow) != 0:
+			risk_estimate = {k:v for k,v in risk_estimate.items() if v != 0}
+		
 		top_risk_tuples = list(sorted(risk_estimate.items(), key=lambda x: x[1]))[-10:]
 		y = [lga_name_map.get(n, 'Error') for n, r in top_risk_tuples]
-		x = [r for n, r in top_risk_tuples]
-		fig = go.Figure(data=[go.Bar(x=x, y=y, orientation='h',
-                               marker=dict(color=x, cmin=0, colorscale='reds'))])
+		x = np.array([r for n, r in top_risk_tuples])
+
+		top_risk_tuples_log = [np.log10(v+10**(-10)) for k,v in top_risk_tuples]# Log transform for colourscale
+		
+		fig = go.Figure(data=[go.Bar(x=x, y=y, orientation='h', hoverinfo='skip',
+                               marker=dict(color=top_risk_tuples_log, cmin=0, colorscale='reds'))])
+
 		fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
 		return fig
 	else:
 		return empty_graph
@@ -310,10 +372,7 @@ def generate_csv(n_clicks, risk_estimate_variable, state):
 
 		return send_data_frame(state_geo_df.to_csv, filename="Risk_by_LGA.csv")
 
-
 # Run
-
-# print('A new Python instance is starting')
 server = app.server # the Flask app
 
 if __name__ == '__main__':
