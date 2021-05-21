@@ -9,3 +9,7 @@ This repository contains the front end of the visualization. It uses Dash to map
   
 To run you will need a `server_credentials.json` file with the access credidtials to the UMelb database. This should come in the format:
 `{"server": "<name>.database.windows.net", "database": "<db_name>", "username": "<username>", "password": "<pwd>", "driver": "{ODBC Driver 17 for SQL Server}"}`
+
+To run on an Apache server with WSGI:
+- Put the `wsgi_files/dash.conf` file in `/etc/apache2/sites-available` on your server.
+- Put the `wsgi_files/coviddash.wsgi` file in `/var/www/html/wsgi/`.
