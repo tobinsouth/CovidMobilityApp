@@ -4,7 +4,7 @@ import pandas as pd, numpy as np
 from datetime import *
 
 here = '/home/tobin/COVID-Risk-App' # WSGI likes it when we set the absolute path
-# here = '.'
+# here = '.' # For testing/local development purposes
 
 
 ###############################################################################################################################
@@ -155,7 +155,6 @@ empty_graph = {
 
 
 # Update Choropleth
-# print('Reading in geopandas')
 full_geo_df = geopandas.read_file(here+"/data/LGA_shapefile.geojson")
 full_geo_df.id = pd.to_numeric(full_geo_df.id)
 full_geo_df.LGA_CODE19 = pd.to_numeric(full_geo_df.LGA_CODE19)

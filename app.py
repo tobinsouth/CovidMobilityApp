@@ -28,6 +28,7 @@ from FB_UoM_data import *
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets,
                 requests_pathname_prefix='/coviddash/' ) 
+
 app.title = "COVID-19 Spatial Risk Map"
 
 app.layout = html.Div(style={'margin':20}, children = [
@@ -300,6 +301,7 @@ def update_choropleth(risk_estimate, show_outbreak_centres, show_low_flow, state
 										'Median Age: %{customdata[4]} <br>'+
 										'Area (km^2): %{customdata[2]} <br>')
 
+		# This fixes the log colourscale to show the original values
 		min_vals = min(risk_estimate_log.values())
 		max_vals = max(risk_estimate_log.values())
 		tickvals = [round(n, 4) for n in np.logspace(min_vals, max_vals, num = 6)]
