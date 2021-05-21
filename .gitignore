@@ -4,6 +4,7 @@ server_credentials.json
 data/LGA.geojson
 data/FB_sample_data.csv
 development-enviroment
+data/LGA_small*.geojson
 
 .vscode
 
