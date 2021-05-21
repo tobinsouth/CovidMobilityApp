@@ -156,7 +156,7 @@ empty_graph = {
 
 # Update Choropleth
 # print('Reading in geopandas')
-full_geo_df = geopandas.read_file(here+"/data/LGA_small_02.geojson")
+full_geo_df = geopandas.read_file(here+"/data/LGA_shapefile.geojson")
 full_geo_df.id = pd.to_numeric(full_geo_df.id)
 full_geo_df.LGA_CODE19 = pd.to_numeric(full_geo_df.LGA_CODE19)
 full_geo_df.AREASQKM19 = pd.to_numeric(full_geo_df.AREASQKM19)
