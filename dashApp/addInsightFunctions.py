@@ -13,7 +13,7 @@ from .params import here
 
 # Helper functions
 import json
-with open(here+'/data/addInsights_credentials.json.json', 'r') as f:
+with open(here+'/data/addInsights_credentials.json', 'r') as f:
 	creds = json.load(f)
 
 def connectionSetup():
