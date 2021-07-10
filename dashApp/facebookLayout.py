@@ -28,6 +28,8 @@ facebookLayout = html.Div(style={'margin':20}, children = [
 		This section's aggregate data is provided by [Facebook's Data for Good](https://dataforgood.fb.com/) initiative. To learn more about the methods used here, their reliability and their applicability, read [Risk mapping for COVID-19 outbreaks in Australia using mobility data](https://royalsocietypublishing.org/doi/full/10.1098/rsif.2020.0657).
 
 		To use the app select a range of dates and times to aggregate mobility data over for a state. Outbreaks may be started from any set of local government areas. A generalised risk profile will be generated when no locations are selected.
+
+		**Note:** The data from Facebook has changed format and is not long being updated. If there is an ongoing interest in using this product please contact [the data maintainer](mailto:cameron.zachreson@unimelb.edu.au) to request updated data.
 		"""
 		))),
 	html.Hr(),
