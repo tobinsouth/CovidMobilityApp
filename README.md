@@ -13,3 +13,15 @@ To run you will need a `server_credentials.json` file with the access credidtial
 To run on an Apache server with WSGI:
 - Put the `wsgi_files/dash.conf` file in `/etc/apache2/sites-available` on your server.
 - Put the `wsgi_files/coviddash.wsgi` file in `/var/www/html/wsgi/`.
+
+
+
+
+
+
+Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
+
+This work is licensed under a
+[Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
+
+[![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
