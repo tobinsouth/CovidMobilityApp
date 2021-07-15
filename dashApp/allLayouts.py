@@ -1,6 +1,7 @@
 from .server import app, server
 from .addInsightsLayouts import *
 from .facebookLayout import *
+from .googleMobilityLayout import *
 
 app.layout = html.Div(style={'margin':20}, children = [
     html.Div([html.H1("COVID-19 Risk Mapping")], className="row",  style={'textAlign': "center"}),
@@ -11,6 +12,7 @@ app.layout = html.Div(style={'margin':20}, children = [
 		"""
 		))),
     dcc.Tabs([
+        dcc.Tab(label='Google Mobility Data', children=googleLayout),
         dcc.Tab(label='Traffic Data (AddInsights)', children=addInsightsLayout),
         dcc.Tab(label='Facebook Mobility Data', children=facebookLayout),
     ]),
@@ -28,6 +30,9 @@ app.layout = html.Div(style={'margin':20}, children = [
             Please note this app may discontinue or vary at any time without notice.
 
             This website contains links to external organisations and information. The organsiations that authored this app accept do not accept responsibility for, nor endorse, the content of any linked site.
+
+            #### Acknowledgements
+            This app was made with ❤️ by Tobin South with signifcant contributions from Lewis Mitchell, Cameron Zachreson, Peter Dawson, Nicholas Geard, Glenn Burgess, Bradley Donnelly. Thanks Nic Rebuli for the idea to include Google Data. 
             """
     ))),
 ])
