@@ -1,3 +1,5 @@
+print('Downloading Google data')
+
 import pandas as pd
 
 variables_to_plot = ['retail_and_recreation_percent_change_from_baseline',
