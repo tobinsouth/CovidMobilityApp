@@ -1,6 +1,5 @@
 print('Downloading Google data')
-
-import pandas as pd
+import pandas as pd, numpy as np
 
 variables_to_plot = ['retail_and_recreation_percent_change_from_baseline',
        'grocery_and_pharmacy_percent_change_from_baseline',
