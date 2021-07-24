@@ -1,0 +1,1688 @@
+(dp0
+I10050
+VAlbury (C)
+p1
+sI10180
+VArmidale Regional (A)
+p2
+sI10250
+VBallina (A)
+p3
+sI10300
+VBalranald (A)
+p4
+sI10470
+VBathurst Regional (A)
+p5
+sI10500
+VBayside (A)
+p6
+sI10550
+VBega Valley (A)
+p7
+sI10600
+VBellingen (A)
+p8
+sI10650
+VBerrigan (A)
+p9
+sI10750
+VBlacktown (C)
+p10
+sI10800
+VBland (A)
+p11
+sI10850
+VBlayney (A)
+p12
+sI10900
+VBlue Mountains (C)
+p13
+sI10950
+VBogan (A)
+p14
+sI11150
+VBourke (A)
+p15
+sI11200
+VBrewarrina (A)
+p16
+sI11250
+VBroken Hill (C)
+p17
+sI11300
+VBurwood (A)
+p18
+sI11350
+VByron (A)
+p19
+sI11400
+VCabonne (A)
+p20
+sI11450
+VCamden (A)
+p21
+sI11500
+VCampbelltown (C) (NSW)
+p22
+sI11520
+VCanada Bay (A)
+p23
+sI11570
+VCanterbury-Bankstown (A)
+p24
+sI11600
+VCarrathool (A)
+p25
+sI11650
+VCentral Coast (C) (NSW)
+p26
+sI11700
+VCentral Darling (A)
+p27
+sI11720
+VCessnock (C)
+p28
+sI11730
+VClarence Valley (A)
+p29
+sI11750
+VCobar (A)
+p30
+sI11800
+VCoffs Harbour (C)
+p31
+sI12000
+VCoolamon (A)
+p32
+sI12150
+VCoonamble (A)
+p33
+sI12160
+VCootamundra-Gundagai Regional (A)
+p34
+sI12350
+VCowra (A)
+p35
+sI12380
+VCumberland (A)
+p36
+sI12390
+VDubbo Regional (A)
+p37
+sI12700
+VDungog (A)
+p38
+sI12730
+VEdward River (A)
+p39
+sI12750
+VEurobodalla (A)
+p40
+sI12850
+VFairfield (C)
+p41
+sI12870
+VFederation (A)
+p42
+sI12900
+VForbes (A)
+p43
+sI12930
+VGeorges River (A)
+p44
+sI12950
+VGilgandra (A)
+p45
+sI13010
+VGlen Innes Severn (A)
+p46
+sI13310
+VGoulburn Mulwaree (A)
+p47
+sI13340
+VGreater Hume Shire (A)
+p48
+sI13450
+VGriffith (C)
+p49
+sI13550
+VGunnedah (A)
+p50
+sI13660
+VGwydir (A)
+p51
+sI13800
+VHawkesbury (C)
+p52
+sI13850
+VHay (A)
+p53
+sI13910
+VHilltops (A)
+p54
+sI14000
+VHornsby (A)
+p55
+sI14100
+VHunters Hill (A)
+p56
+sI14170
+VInner West (A)
+p57
+sI14220
+VInverell (A)
+p58
+sI14300
+VJunee (A)
+p59
+sI14350
+VKempsey (A)
+p60
+sI14400
+VKiama (A)
+p61
+sI14500
+VKu-ring-gai (A)
+p62
+sI14550
+VKyogle (A)
+p63
+sI14600
+VLachlan (A)
+p64
+sI14650
+VLake Macquarie (C)
+p65
+sI14700
+VLane Cove (A)
+p66
+sI14750
+VLeeton (A)
+p67
+sI14850
+VLismore (C)
+p68
+sI14870
+VLithgow (C)
+p69
+sI14900
+VLiverpool (C)
+p70
+sI14920
+VLiverpool Plains (A)
+p71
+sI14950
+VLockhart (A)
+p72
+sI15050
+VMaitland (C)
+p73
+sI15240
+VMid-Coast (A)
+p74
+sI15270
+VMid-Western Regional (A)
+p75
+sI15300
+VMoree Plains (A)
+p76
+sI15350
+VMosman (A)
+p77
+sI15520
+VMurray River (A)
+p78
+sI15560
+VMurrumbidgee (A)
+p79
+sI15650
+VMuswellbrook (A)
+p80
+sI15700
+VNambucca Valley (A)
+p81
+sI15750
+VNarrabri (A)
+p82
+sI15800
+VNarrandera (A)
+p83
+sI15850
+VNarromine (A)
+p84
+sI15900
+VNewcastle (C)
+p85
+sI15950
+VNorth Sydney (A)
+p86
+sI15990
+VNorthern Beaches (A)
+p87
+sI16100
+VOberon (A)
+p88
+sI16150
+VOrange (C)
+p89
+sI16200
+VParkes (A)
+p90
+sI16260
+VParramatta (C)
+p91
+sI16350
+VPenrith (C)
+p92
+sI16380
+VPort Macquarie-Hastings (A)
+p93
+sI16400
+VPort Stephens (A)
+p94
+sI16490
+VQueanbeyan-Palerang Regional (A)
+p95
+sI16550
+VRandwick (C)
+p96
+sI16610
+VRichmond Valley (A)
+p97
+sI16700
+VRyde (C)
+p98
+sI16900
+VShellharbour (C)
+p99
+sI16950
+VShoalhaven (C)
+p100
+sI17000
+VSingleton (A)
+p101
+sI17040
+VSnowy Monaro Regional (A)
+p102
+sI17080
+VSnowy Valleys (A)
+p103
+sI17100
+VStrathfield (A)
+p104
+sI17150
+VSutherland Shire (A)
+p105
+sI17200
+VSydney (C)
+p106
+sI17310
+VTamworth Regional (A)
+p107
+sI17350
+VTemora (A)
+p108
+sI17400
+VTenterfield (A)
+p109
+sI17420
+VThe Hills Shire (A)
+p110
+sI17550
+VTweed (A)
+p111
+sI17620
+VUpper Hunter Shire (A)
+p112
+sI17640
+VUpper Lachlan Shire (A)
+p113
+sI17650
+VUralla (A)
+p114
+sI17750
+VWagga Wagga (C)
+p115
+sI17850
+VWalcha (A)
+p116
+sI17900
+VWalgett (A)
+p117
+sI17950
+VWarren (A)
+p118
+sI18020
+VWarrumbungle Shire (A)
+p119
+sI18050
+VWaverley (A)
+p120
+sI18100
+VWeddin (A)
+p121
+sI18200
+VWentworth (A)
+p122
+sI18250
+VWilloughby (C)
+p123
+sI18350
+VWingecarribee (A)
+p124
+sI18400
+VWollondilly (A)
+p125
+sI18450
+VWollongong (C)
+p126
+sI18500
+VWoollahra (A)
+p127
+sI18710
+VYass Valley (A)
+p128
+sI19399
+VUnincorporated NSW
+p129
+sI19499
+VNo usual address (NSW)
+p130
+sI19799
+VMigratory - Offshore - Shipping (NSW)
+p131
+sI20110
+VAlpine (S)
+p132
+sI20260
+VArarat (RC)
+p133
+sI20570
+VBallarat (C)
+p134
+sI20660
+VBanyule (C)
+p135
+sI20740
+VBass Coast (S)
+p136
+sI20830
+VBaw Baw (S)
+p137
+sI20910
+VBayside (C)
+p138
+sI21010
+VBenalla (RC)
+p139
+sI21110
+VBoroondara (C)
+p140
+sI21180
+VBrimbank (C)
+p141
+sI21270
+VBuloke (S)
+p142
+sI21370
+VCampaspe (S)
+p143
+sI21450
+VCardinia (S)
+p144
+sI21610
+VCasey (C)
+p145
+sI21670
+VCentral Goldfields (S)
+p146
+sI21750
+VColac-Otway (S)
+p147
+sI21830
+VCorangamite (S)
+p148
+sI21890
+VDarebin (C)
+p149
+sI22110
+VEast Gippsland (S)
+p150
+sI22170
+VFrankston (C)
+p151
+sI22250
+VGannawarra (S)
+p152
+sI22310
+VGlen Eira (C)
+p153
+sI22410
+VGlenelg (S)
+p154
+sI22490
+VGolden Plains (S)
+p155
+sI22620
+VGreater Bendigo (C)
+p156
+sI22670
+VGreater Dandenong (C)
+p157
+sI22750
+VGreater Geelong (C)
+p158
+sI22830
+VGreater Shepparton (C)
+p159
+sI22910
+VHepburn (S)
+p160
+sI22980
+VHindmarsh (S)
+p161
+sI23110
+VHobsons Bay (C)
+p162
+sI23190
+VHorsham (RC)
+p163
+sI23270
+VHume (C)
+p164
+sI23350
+VIndigo (S)
+p165
+sI23430
+VKingston (C) (Vic.)
+p166
+sI23670
+VKnox (C)
+p167
+sI23810
+VLatrobe (C) (Vic.)
+p168
+sI23940
+VLoddon (S)
+p169
+sI24130
+VMacedon Ranges (S)
+p170
+sI24210
+VManningham (C)
+p171
+sI24250
+VMansfield (S)
+p172
+sI24330
+VMaribyrnong (C)
+p173
+sI24410
+VMaroondah (C)
+p174
+sI24600
+VMelbourne (C)
+p175
+sI24650
+VMelton (C)
+p176
+sI24780
+VMildura (RC)
+p177
+sI24850
+VMitchell (S)
+p178
+sI24900
+VMoira (S)
+p179
+sI24970
+VMonash (C)
+p180
+sI25060
+VMoonee Valley (C)
+p181
+sI25150
+VMoorabool (S)
+p182
+sI25250
+VMoreland (C)
+p183
+sI25340
+VMornington Peninsula (S)
+p184
+sI25430
+VMount Alexander (S)
+p185
+sI25490
+VMoyne (S)
+p186
+sI25620
+VMurrindindi (S)
+p187
+sI25710
+VNillumbik (S)
+p188
+sI25810
+VNorthern Grampians (S)
+p189
+sI25900
+VPort Phillip (C)
+p190
+sI25990
+VPyrenees (S)
+p191
+sI26080
+VQueenscliffe (B)
+p192
+sI26170
+VSouth Gippsland (S)
+p193
+sI26260
+VSouthern Grampians (S)
+p194
+sI26350
+VStonnington (C)
+p195
+sI26430
+VStrathbogie (S)
+p196
+sI26490
+VSurf Coast (S)
+p197
+sI26610
+VSwan Hill (RC)
+p198
+sI26670
+VTowong (S)
+p199
+sI26700
+VWangaratta (RC)
+p200
+sI26730
+VWarrnambool (C)
+p201
+sI26810
+VWellington (S)
+p202
+sI26890
+VWest Wimmera (S)
+p203
+sI26980
+VWhitehorse (C)
+p204
+sI27070
+VWhittlesea (C)
+p205
+sI27170
+VWodonga (C)
+p206
+sI27260
+VWyndham (C)
+p207
+sI27350
+VYarra (C)
+p208
+sI27450
+VYarra Ranges (S)
+p209
+sI27630
+VYarriambiack (S)
+p210
+sI29399
+VUnincorporated Vic
+p211
+sI29499
+VNo usual address (Vic.)
+p212
+sI29799
+VMigratory - Offshore - Shipping (Vic.)
+p213
+sI30250
+VAurukun (S)
+p214
+sI30300
+VBalonne (S)
+p215
+sI30370
+VBanana (S)
+p216
+sI30410
+VBarcaldine (R)
+p217
+sI30450
+VBarcoo (S)
+p218
+sI30760
+VBlackall-Tambo (R)
+p219
+sI30900
+VBoulia (S)
+p220
+sI31000
+VBrisbane (C)
+p221
+sI31750
+VBulloo (S)
+p222
+sI31820
+VBundaberg (R)
+p223
+sI31900
+VBurdekin (S)
+p224
+sI31950
+VBurke (S)
+p225
+sI32080
+VCairns (R)
+p226
+sI32250
+VCarpentaria (S)
+p227
+sI32260
+VCassowary Coast (R)
+p228
+sI32270
+VCentral Highlands (R) (Qld)
+p229
+sI32310
+VCharters Towers (R)
+p230
+sI32330
+VCherbourg (S)
+p231
+sI32450
+VCloncurry (S)
+p232
+sI32500
+VCook (S)
+p233
+sI32600
+VCroydon (S)
+p234
+sI32750
+VDiamantina (S)
+p235
+sI32770
+VDoomadgee (S)
+p236
+sI32810
+VDouglas (S)
+p237
+sI33100
+VEtheridge (S)
+p238
+sI33200
+VFlinders (S) (Qld)
+p239
+sI33220
+VFraser Coast (R)
+p240
+sI33360
+VGladstone (R)
+p241
+sI33430
+VGold Coast (C)
+p242
+sI33610
+VGoondiwindi (R)
+p243
+sI33620
+VGympie (R)
+p244
+sI33800
+VHinchinbrook (S)
+p245
+sI33830
+VHope Vale (S)
+p246
+sI33960
+VIpswich (C)
+p247
+sI33980
+VIsaac (R)
+p248
+sI34420
+VKowanyama (S)
+p249
+sI34530
+VLivingstone (S)
+p250
+sI34570
+VLockhart River (S)
+p251
+sI34580
+VLockyer Valley (R)
+p252
+sI34590
+VLogan (C)
+p253
+sI34710
+VLongreach (R)
+p254
+sI34770
+VMackay (R)
+p255
+sI34800
+VMcKinlay (S)
+p256
+sI34830
+VMapoon (S)
+p257
+sI34860
+VMaranoa (R)
+p258
+sI34880
+VMareeba (S)
+p259
+sI35010
+VMoreton Bay (R)
+p260
+sI35250
+VMornington (S)
+p261
+sI35300
+VMount Isa (C)
+p262
+sI35600
+VMurweh (S)
+p263
+sI35670
+VNapranum (S)
+p264
+sI35740
+VNoosa (S)
+p265
+sI35760
+VNorth Burnett (R)
+p266
+sI35780
+VNorthern Peninsula Area (R)
+p267
+sI35790
+VPalm Island (S)
+p268
+sI35800
+VParoo (S)
+p269
+sI36070
+VPormpuraaw (S)
+p270
+sI36150
+VQuilpie (S)
+p271
+sI36250
+VRedland (C)
+p272
+sI36300
+VRichmond (S)
+p273
+sI36370
+VRockhampton (R)
+p274
+sI36510
+VScenic Rim (R)
+p275
+sI36580
+VSomerset (R)
+p276
+sI36630
+VSouth Burnett (R)
+p277
+sI36660
+VSouthern Downs (R)
+p278
+sI36720
+VSunshine Coast (R)
+p279
+sI36820
+VTablelands (R)
+p280
+sI36910
+VToowoomba (R)
+p281
+sI36950
+VTorres (S)
+p282
+sI36960
+VTorres Strait Island (R)
+p283
+sI37010
+VTownsville (C)
+p284
+sI37300
+VWeipa (T)
+p285
+sI37310
+VWestern Downs (R)
+p286
+sI37340
+VWhitsunday (R)
+p287
+sI37400
+VWinton (S)
+p288
+sI37550
+VWoorabinda (S)
+p289
+sI37570
+VWujal Wujal (S)
+p290
+sI37600
+VYarrabah (S)
+p291
+sI39499
+VNo usual address (Qld)
+p292
+sI39799
+VMigratory - Offshore - Shipping (Qld)
+p293
+sI40070
+VAdelaide (C)
+p294
+sI40120
+VAdelaide Hills (DC)
+p295
+sI40150
+VAdelaide Plains (DC)
+p296
+sI40220
+VAlexandrina (DC)
+p297
+sI40250
+VAnangu Pitjantjatjara (AC)
+p298
+sI40310
+VBarossa (DC)
+p299
+sI40430
+VBarunga West (DC)
+p300
+sI40520
+VBerri and Barmera (DC)
+p301
+sI40700
+VBurnside (C)
+p302
+sI40910
+VCampbelltown (C) (SA)
+p303
+sI41010
+VCeduna (DC)
+p304
+sI41060
+VCharles Sturt (C)
+p305
+sI41140
+VClare and Gilbert Valleys (DC)
+p306
+sI41190
+VCleve (DC)
+p307
+sI41330
+VCoober Pedy (DC)
+p308
+sI41560
+VCopper Coast (DC)
+p309
+sI41750
+VElliston (DC)
+p310
+sI41830
+VFlinders Ranges (DC)
+p311
+sI41960
+VFranklin Harbour (DC)
+p312
+sI42030
+VGawler (T)
+p313
+sI42110
+VGoyder (DC)
+p314
+sI42250
+VGrant (DC)
+p315
+sI42600
+VHoldfast Bay (C)
+p316
+sI42750
+VKangaroo Island (DC)
+p317
+sI43080
+VKaroonda East Murray (DC)
+p318
+sI43220
+VKimba (DC)
+p319
+sI43360
+VKingston (DC) (SA)
+p320
+sI43650
+VLight (RegC)
+p321
+sI43710
+VLower Eyre Peninsula (DC)
+p322
+sI43790
+VLoxton Waikerie (DC)
+p323
+sI44000
+VMaralinga Tjarutja (AC)
+p324
+sI44060
+VMarion (C)
+p325
+sI44210
+VMid Murray (DC)
+p326
+sI44340
+VMitcham (C)
+p327
+sI44550
+VMount Barker (DC)
+p328
+sI44620
+VMount Gambier (C)
+p329
+sI44830
+VMount Remarkable (DC)
+p330
+sI45040
+VMurray Bridge (RC)
+p331
+sI45090
+VNaracoorte and Lucindale (DC)
+p332
+sI45120
+VNorthern Areas (DC)
+p333
+sI45290
+VNorwood Payneham St Peters (C)
+p334
+sI45340
+VOnkaparinga (C)
+p335
+sI45400
+VOrroroo/Carrieton (DC)
+p336
+sI45540
+VPeterborough (DC)
+p337
+sI45680
+VPlayford (C)
+p338
+sI45890
+VPort Adelaide Enfield (C)
+p339
+sI46090
+VPort Augusta (C)
+p340
+sI46300
+VPort Lincoln (C)
+p341
+sI46450
+VPort Pirie City and Dists (M)
+p342
+sI46510
+VProspect (C)
+p343
+sI46670
+VRenmark Paringa (DC)
+p344
+sI46860
+VRobe (DC)
+p345
+sI46970
+VRoxby Downs (M)
+p346
+sI47140
+VSalisbury (C)
+p347
+sI47290
+VSouthern Mallee (DC)
+p348
+sI47490
+VStreaky Bay (DC)
+p349
+sI47630
+VTatiara (DC)
+p350
+sI47700
+VTea Tree Gully (C)
+p351
+sI47800
+VThe Coorong (DC)
+p352
+sI47910
+VTumby Bay (DC)
+p353
+sI47980
+VUnley (C)
+p354
+sI48050
+VVictor Harbor (C)
+p355
+sI48130
+VWakefield (DC)
+p356
+sI48260
+VWalkerville (M)
+p357
+sI48340
+VWattle Range (DC)
+p358
+sI48410
+VWest Torrens (C)
+p359
+sI48540
+VWhyalla (C)
+p360
+sI48640
+VWudinna (DC)
+p361
+sI48750
+VYankalilla (DC)
+p362
+sI48830
+VYorke Peninsula (DC)
+p363
+sI49399
+VUnincorporated SA
+p364
+sI49499
+VNo usual address (SA)
+p365
+sI49799
+VMigratory - Offshore - Shipping (SA)
+p366
+sI50080
+VAlbany (C)
+p367
+sI50210
+VArmadale (C)
+p368
+sI50250
+VAshburton (S)
+p369
+sI50280
+VAugusta-Margaret River (S)
+p370
+sI50350
+VBassendean (T)
+p371
+sI50420
+VBayswater (C)
+p372
+sI50490
+VBelmont (C)
+p373
+sI50560
+VBeverley (S)
+p374
+sI50630
+VBoddington (S)
+p375
+sI50770
+VBoyup Brook (S)
+p376
+sI50840
+VBridgetown-Greenbushes (S)
+p377
+sI50910
+VBrookton (S)
+p378
+sI50980
+VBroome (S)
+p379
+sI51080
+VBroomehill-Tambellup (S)
+p380
+sI51120
+VBruce Rock (S)
+p381
+sI51190
+VBunbury (C)
+p382
+sI51260
+VBusselton (C)
+p383
+sI51310
+VCambridge (T)
+p384
+sI51330
+VCanning (C)
+p385
+sI51400
+VCapel (S)
+p386
+sI51470
+VCarnamah (S)
+p387
+sI51540
+VCarnarvon (S)
+p388
+sI51610
+VChapman Valley (S)
+p389
+sI51680
+VChittering (S)
+p390
+sI51750
+VClaremont (T)
+p391
+sI51820
+VCockburn (C)
+p392
+sI51890
+VCollie (S)
+p393
+sI51960
+VCoolgardie (S)
+p394
+sI52030
+VCoorow (S)
+p395
+sI52100
+VCorrigin (S)
+p396
+sI52170
+VCottesloe (T)
+p397
+sI52240
+VCranbrook (S)
+p398
+sI52310
+VCuballing (S)
+p399
+sI52380
+VCue (S)
+p400
+sI52450
+VCunderdin (S)
+p401
+sI52520
+VDalwallinu (S)
+p402
+sI52590
+VDandaragan (S)
+p403
+sI52660
+VDardanup (S)
+p404
+sI52730
+VDenmark (S)
+p405
+sI52800
+VDerby-West Kimberley (S)
+p406
+sI52870
+VDonnybrook-Balingup (S)
+p407
+sI52940
+VDowerin (S)
+p408
+sI53010
+VDumbleyung (S)
+p409
+sI53080
+VDundas (S)
+p410
+sI53150
+VEast Fremantle (T)
+p411
+sI53220
+VEast Pilbara (S)
+p412
+sI53290
+VEsperance (S)
+p413
+sI53360
+VExmouth (S)
+p414
+sI53430
+VFremantle (C)
+p415
+sI53570
+VGingin (S)
+p416
+sI53640
+VGnowangerup (S)
+p417
+sI53710
+VGoomalling (S)
+p418
+sI53780
+VGosnells (C)
+p419
+sI53800
+VGreater Geraldton (C)
+p420
+sI53920
+VHalls Creek (S)
+p421
+sI53990
+VHarvey (S)
+p422
+sI54060
+VIrwin (S)
+p423
+sI54130
+VJerramungup (S)
+p424
+sI54170
+VJoondalup (C)
+p425
+sI54200
+VKalamunda (C)
+p426
+sI54280
+VKalgoorlie/Boulder (C)
+p427
+sI54310
+VKarratha (C)
+p428
+sI54340
+VKatanning (S)
+p429
+sI54410
+VKellerberrin (S)
+p430
+sI54480
+VKent (S)
+p431
+sI54550
+VKojonup (S)
+p432
+sI54620
+VKondinin (S)
+p433
+sI54690
+VKoorda (S)
+p434
+sI54760
+VKulin (S)
+p435
+sI54830
+VKwinana (C)
+p436
+sI54900
+VLake Grace (S)
+p437
+sI54970
+VLaverton (S)
+p438
+sI55040
+VLeonora (S)
+p439
+sI55110
+VMandurah (C)
+p440
+sI55180
+VManjimup (S)
+p441
+sI55250
+VMeekatharra (S)
+p442
+sI55320
+VMelville (C)
+p443
+sI55390
+VMenzies (S)
+p444
+sI55460
+VMerredin (S)
+p445
+sI55530
+VMingenew (S)
+p446
+sI55600
+VMoora (S)
+p447
+sI55670
+VMorawa (S)
+p448
+sI55740
+VMosman Park (T)
+p449
+sI55810
+VMount Magnet (S)
+p450
+sI55880
+VMount Marshall (S)
+p451
+sI55950
+VMukinbudin (S)
+p452
+sI56090
+VMundaring (S)
+p453
+sI56160
+VMurchison (S)
+p454
+sI56230
+VMurray (S)
+p455
+sI56300
+VNannup (S)
+p456
+sI56370
+VNarembeen (S)
+p457
+sI56460
+VNarrogin (S)
+p458
+sI56580
+VNedlands (C)
+p459
+sI56620
+VNgaanyatjarraku (S)
+p460
+sI56730
+VNortham (S)
+p461
+sI56790
+VNorthampton (S)
+p462
+sI56860
+VNungarin (S)
+p463
+sI56930
+VPeppermint Grove (S)
+p464
+sI57000
+VPerenjori (S)
+p465
+sI57080
+VPerth (C)
+p466
+sI57140
+VPingelly (S)
+p467
+sI57210
+VPlantagenet (S)
+p468
+sI57280
+VPort Hedland (T)
+p469
+sI57350
+VQuairading (S)
+p470
+sI57420
+VRavensthorpe (S)
+p471
+sI57490
+VRockingham (C)
+p472
+sI57630
+VSandstone (S)
+p473
+sI57700
+VSerpentine-Jarrahdale (S)
+p474
+sI57770
+VShark Bay (S)
+p475
+sI57840
+VSouth Perth (C)
+p476
+sI57910
+VStirling (C)
+p477
+sI57980
+VSubiaco (C)
+p478
+sI58050
+VSwan (C)
+p479
+sI58190
+VTammin (S)
+p480
+sI58260
+VThree Springs (S)
+p481
+sI58330
+VToodyay (S)
+p482
+sI58400
+VTrayning (S)
+p483
+sI58470
+VUpper Gascoyne (S)
+p484
+sI58510
+VVictoria Park (T)
+p485
+sI58540
+VVictoria Plains (S)
+p486
+sI58570
+VVincent (C)
+p487
+sI58610
+VWagin (S)
+p488
+sI58680
+VWandering (S)
+p489
+sI58760
+VWanneroo (C)
+p490
+sI58820
+VWaroona (S)
+p491
+sI58890
+VWest Arthur (S)
+p492
+sI59030
+VWestonia (S)
+p493
+sI59100
+VWickepin (S)
+p494
+sI59170
+VWilliams (S)
+p495
+sI59250
+VWiluna (S)
+p496
+sI59310
+VWongan-Ballidu (S)
+p497
+sI59320
+VWoodanilling (S)
+p498
+sI59330
+VWyalkatchem (S)
+p499
+sI59340
+VWyndham-East Kimberley (S)
+p500
+sI59350
+VYalgoo (S)
+p501
+sI59360
+VYilgarn (S)
+p502
+sI59370
+VYork (S)
+p503
+sI59499
+VNo usual address (WA)
+p504
+sI59799
+VMigratory - Offshore - Shipping (WA)
+p505
+sI60210
+VBreak O'Day (M)
+p506
+sI60410
+VBrighton (M)
+p507
+sI60610
+VBurnie (C)
+p508
+sI60810
+VCentral Coast (M) (Tas.)
+p509
+sI61010
+VCentral Highlands (M) (Tas.)
+p510
+sI61210
+VCircular Head (M)
+p511
+sI61410
+VClarence (C)
+p512
+sI61510
+VDerwent Valley (M)
+p513
+sI61610
+VDevonport (C)
+p514
+sI61810
+VDorset (M)
+p515
+sI62010
+VFlinders (M) (Tas.)
+p516
+sI62210
+VGeorge Town (M)
+p517
+sI62410
+VGlamorgan/Spring Bay (M)
+p518
+sI62610
+VGlenorchy (C)
+p519
+sI62810
+VHobart (C)
+p520
+sI63010
+VHuon Valley (M)
+p521
+sI63210
+VKentish (M)
+p522
+sI63410
+VKing Island (M)
+p523
+sI63610
+VKingborough (M)
+p524
+sI63810
+VLatrobe (M) (Tas.)
+p525
+sI64010
+VLaunceston (C)
+p526
+sI64210
+VMeander Valley (M)
+p527
+sI64610
+VNorthern Midlands (M)
+p528
+sI64810
+VSorell (M)
+p529
+sI65010
+VSouthern Midlands (M)
+p530
+sI65210
+VTasman (M)
+p531
+sI65410
+VWaratah/Wynyard (M)
+p532
+sI65610
+VWest Coast (M)
+p533
+sI65810
+VWest Tamar (M)
+p534
+sI69499
+VNo usual address (Tas.)
+p535
+sI69799
+VMigratory - Offshore - Shipping (Tas.)
+p536
+sI70200
+VAlice Springs (T)
+p537
+sI70420
+VBarkly (R)
+p538
+sI70540
+VBelyuen (S)
+p539
+sI70620
+VCentral Desert (R)
+p540
+sI70700
+VCoomalie (S)
+p541
+sI71000
+VDarwin (C)
+p542
+sI71300
+VEast Arnhem (R)
+p543
+sI72200
+VKatherine (T)
+p544
+sI72300
+VLitchfield (M)
+p545
+sI72330
+VMacDonnell (R)
+p546
+sI72800
+VPalmerston (C)
+p547
+sI73600
+VRoper Gulf (R)
+p548
+sI74050
+VTiwi Islands (R)
+p549
+sI74550
+VVictoria Daly (R)
+p550
+sI74560
+VWagait (S)
+p551
+sI74660
+VWest Arnhem (R)
+p552
+sI74680
+VWest Daly (R)
+p553
+sI79399
+VUnincorporated NT
+p554
+sI79499
+VNo usual address (NT)
+p555
+sI79799
+VMigratory - Offshore - Shipping (NT)
+p556
+sI89399
+VUnincorporated ACT
+p557
+sI89499
+VNo usual address (ACT)
+p558
+sI89799
+VMigratory - Offshore - Shipping (ACT)
+p559
+sI99399
+VUnincorp. Other Territories
+p560
+sI99499
+VNo usual address (OT)
+p561
+sI99799
+VMigratory - Offshore - Shipping (OT)
+p562
+s.

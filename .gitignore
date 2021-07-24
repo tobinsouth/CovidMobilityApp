@@ -1,7 +1,14 @@
 # Project Specific
 *_credentials.json
 .DS_Store
-dashApp/data/*
+dashApp/data/server_credentials.json
+dashApp/data/FB_sample_data.csv
+dashApp/data/addInsights_credentials.json
+dashApp/data/lastest_addinsights.csv
+
+# Too large for github
+dashApp/data/LGA.geojson
+
 
 .vscode
 
