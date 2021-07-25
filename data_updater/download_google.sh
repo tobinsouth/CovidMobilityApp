@@ -1,6 +1,6 @@
 git pull --rebase
 
-python3 ./data_updater/download_google.py
+/home/a1171654/python3/Python-3.7.0/python ./data_updater/download_google.py
 
 git add ./dashApp/data/google_mobility_australia.csv
 git add ./dashApp/data/google_data.txt
