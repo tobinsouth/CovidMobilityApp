@@ -32,7 +32,7 @@ app.layout = html.Div(style={'margin':20}, children = [
             This website contains links to external organisations and information. The organsiations that authored this app accept do not accept responsibility for, nor endorse, the content of any linked site.
 
             #### Acknowledgements
-            This app was made with ❤️ by Tobin South with signifcant contributions from Lewis Mitchell, Cameron Zachreson, Peter Dawson, Nicholas Geard, Glenn Burgess, Bradley Donnelly. Thanks Nic Rebuli for the idea to include Google Data. 
+            This app was made by Tobin South with signifcant contributions from Lewis Mitchell, Cameron Zachreson, Peter Dawson, Nicholas Geard, Glenn Burgess, Bradley Donnelly. Thanks Nic Rebuli for the idea to include Google Data. 
             """
     ))),
 ])

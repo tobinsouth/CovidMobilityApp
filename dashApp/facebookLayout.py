@@ -23,7 +23,7 @@ facebookLayout = html.Div(style={'margin':20}, children = [
 	html.Div(className="row", style={'textAlign': "justify", 'padding-right': '30px', 'padding-left': '30px'},
 		children = dcc.Markdown(d(
 		"""
-		### Transmission Risk Between Local Goverment Areas
+		### Transmission Risk Between Local Government Areas
 		
 		This section's aggregate data is provided by [Facebook's Data for Good](https://dataforgood.fb.com/) initiative. To learn more about the methods used here, their reliability and their applicability, read [Risk mapping for COVID-19 outbreaks in Australia using mobility data](https://royalsocietypublishing.org/doi/full/10.1098/rsif.2020.0657).
 
