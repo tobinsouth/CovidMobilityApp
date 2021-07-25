@@ -176,9 +176,9 @@ def updated_description(variable_option_G):
 def update_choropleth_FB(baseline_or_difference_G, state_G, variable_option_G,):
 
     googleState = google[google['state'] == state_G]
-    current_data = googleState[googleState.date == latest_date][['LGA',variable_option_G]].dropna().set_index('LGA')[variable_option_G]
+    current_data = googleState[googleState.date == latest_date][['Council',variable_option_G]].dropna().set_index('Council')[variable_option_G]
     if baseline_or_difference_G == 'difference':
-        one_week_data = googleState[googleState.date == latest_date - pd.Timedelta(days=7)][['LGA',variable_option_G]].dropna().set_index('LGA')[variable_option_G]
+        one_week_data = googleState[googleState.date == latest_date - pd.Timedelta(days=7)][['Council',variable_option_G]].dropna().set_index('Council')[variable_option_G]
         difference_data = current_data - one_week_data
         data = difference_data
         color_name = 'Change from last week'
@@ -188,14 +188,14 @@ def update_choropleth_FB(baseline_or_difference_G, state_G, variable_option_G,):
         color_name = 'Change from baseline'
         title =  "Current difference in %s mobility compared to baseline" % nice_variable_names[variable_option_G]
    
-    state_geo_df = full_geo_df[full_geo_df.STE_NAME16 == state_G]
-    state_geo_df = state_geo_df[state_geo_df.LGA_NAME19.apply(lambda x: x in data.index)]
-    state_geo_df[color_name] = state_geo_df.LGA_NAME19.map(data.to_dict())
+    state_geo_df = full_geo_df[full_geo_df.state == state_G]
+    state_geo_df = state_geo_df[state_geo_df.Council.apply(lambda x: x in data.index)]
+    state_geo_df[color_name] = state_geo_df.Council.map(data.to_dict())
 
     fig = px.choropleth_mapbox(state_geo_df,
                                 geojson=state_geo_df.geometry, 
                                 locations=state_geo_df.index, 
-                                hover_name='LGA_NAME19',
+                                hover_name='Council',
                                 color=color_name,
                                 color_continuous_scale='RdBu_r',
                                 center=cbd_lat_longs[state_G], 
@@ -209,12 +209,12 @@ def update_choropleth_FB(baseline_or_difference_G, state_G, variable_option_G,):
 @app.callback(Output('change_over_time_G', 'figure'), Input('choropleth_G', 'clickData'), Input('state_G','value'), Input('start_date_G','date'), Input('variable_option_G','value'))
 def update_time_plot(clickData, state_G, start_date_G, variable_option_G):
     if clickData is not None:
-        this_LGA = clickData['points'][0]['hovertext']
+        this_Council = clickData['points'][0]['hovertext']
         googleState = google[google['state'] == state_G]
         if start_date_G != date(2020,2,15):
             googleState = googleState[googleState.date > start_date_G]
-        data = googleState[googleState.LGA == this_LGA][['date', variable_option_G]].dropna().sort_values('date')
-        fig = px.line(data, x = 'date', y=variable_option_G, title="Change in %s over time in %s" % (nice_variable_names[variable_option_G], this_LGA))
+        data = googleState[googleState.Council == this_Council][['date', variable_option_G]].dropna().sort_values('date')
+        fig = px.line(data, x = 'date', y=variable_option_G, title="Change in %s over time in %s" % (nice_variable_names[variable_option_G], this_Council))
         fig.add_hline(y=0, line_dash="dash", name="Baseline")
         fig.update_layout(margin={"r":0,"t":40,"l":0,"b":0})
         fig.update_layout(xaxis_title="Date",yaxis_title=nice_variable_names[variable_option_G])
