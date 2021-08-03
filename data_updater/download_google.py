@@ -13,6 +13,6 @@ google = pd.read_csv('https://www.gstatic.com/covid19/mobility/Global_Mobility_R
 google = google.query("country_region_code=='AU'")
 google.rename({'sub_region_1':'state', 'sub_region_2':'Council'}, axis=1, inplace=True) # For clarity
 google = google[['country_region_code', 'country_region', 'state', 'Council', 'date']+variables_to_plot]
-google.to_csv('./dashApp/data/google_mobility_australia.csv', index=False)
+google.to_csv('/home/tobin/CovidMobilityApp/dashApp/data/google_mobility_australia.csv', index=False)
 
 
