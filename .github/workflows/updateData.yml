@@ -3,7 +3,7 @@
 name: py
 on:
   schedule:
-    - cron: "*/10 * * * *" #runs at 00:00 UTC everyday
+    - cron: "*/5 * * * *" #runs at 00:00 UTC everyday
 # on: push
 
 jobs:
@@ -28,8 +28,6 @@ jobs:
         run: echo "Finished"
       - name:  push to remote
         run: |
-          echo "Test push commit to the remote in the workflow" >> test.txt
-
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
