@@ -1,9 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
 name: py
-on:
-  schedule:
-    - cron: "0 * * * *" #runs at 00:00 UTC everyday
+# on:
+#   schedule:
+#     - cron: "0 * * * *" #runs at 00:00 UTC everyday
+on: push
 
 jobs:
   build:
