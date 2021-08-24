@@ -26,5 +26,10 @@ jobs:
           python data_updater/download_google.py
       - name: show results
         run: echo "Finished"
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: google_mobility_australia.csv
+          path: dashApp/data/google_mobility_australia.csv
 #           - name: export index
 #             .... # use crosponding script or actions to help export.
