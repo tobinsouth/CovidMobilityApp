@@ -1,10 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
 name: py
-# on:
-#   schedule:
-#     - cron: "0 * * * *" #runs at 00:00 UTC everyday
-on: push
+on:
+  schedule:
+    - cron: "*/10 * * * *" #runs at 00:00 UTC everyday
+# on: push
 
 jobs:
   build:
@@ -26,10 +26,13 @@ jobs:
           python data_updater/download_google.py
       - name: show results
         run: echo "Finished"
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v2
-        with:
-          name: google_mobility_australia.csv
-          path: dashApp/data/google_mobility_australia.csv
-#           - name: export index
-#             .... # use crosponding script or actions to help export.
+      - name:  push to remote
+        run: |
+          echo "Test push commit to the remote in the workflow" >> test.txt
+
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add dashApp/data/google_mobility_australia.csv
+          git commit -m "Updating google data"
+          git push
