@@ -1,0 +1,46 @@
+# This is a basic workflow to help you get started with Actions
+
+name: update_google_data
+on:
+  schedule:
+    - cron: "0 * * * *" #runs at 00:00 UTC everyday
+# on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content to github runner.
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8 #install the python needed
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas
+      - name: execute py script # run the run.py to get the latest data
+        run: |
+          python data_updater/download_google.py
+      - name: show results
+        run: echo "Finished"
+      - name:  push to remote
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+  
+          git add dashApp/data/google_mobility_australia.csv
+          
+          set +e  # Grep succeeds with nonzero exit codes to show results.
+          git status | grep modified
+          if [ $? -eq 0 ]
+          then
+              set -e
+              git commit -m "Updating google data - $(date)"
+              git push
+          else
+              set -e
+              echo "No changes since last run"
+          fi
