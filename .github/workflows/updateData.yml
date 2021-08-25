@@ -26,21 +26,28 @@ jobs:
           python data_updater/download_google.py
       - name: show results
         run: echo "Finished"
-      - name:  push to remote
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-  
-          git add dashApp/data/google_mobility_australia.csv
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          default_author: github_actions
+          add: 'dashApp/data/google_mobility_australia.csv'
+          message: 'Updating Google Data'
           
-          set +e  # Grep succeeds with nonzero exit codes to show results.
-          git status | grep modified
-          if [ $? -eq 0 ]
-          then
-              set -e
-              git commit -m "Updating google data - $(date)"
-              git push
-          else
-              set -e
-              echo "No changes since last run"
-          fi
+#       - name:  push to remote
+#         run: |
+#           git config --global user.name "github-actions[bot]"
+#           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+  
+#           git add dashApp/data/google_mobility_australia.csv
+          
+#           set +e  # Grep succeeds with nonzero exit codes to show results.
+#           git status | grep modified
+#           if [ $? -eq 0 ]
+#           then
+#               set -e
+#               git commit -m "Updating google data - $(date)"
+#               git push
+#           else
+#               set -e
+#               echo "No changes since last run"
+#           fi
