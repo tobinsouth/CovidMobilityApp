@@ -1,10 +1,10 @@
 # This is a basic workflow to help you get started with Actions
 
 name: update_google_data
-on:
-  schedule:
-    - cron: "0 * * * *" #runs at 00:00 UTC everyday
-# on: workflow_dispatch
+# on:
+#   schedule:
+#     - cron: "0 * * * *" #runs at 00:00 UTC everyday
+on: workflow_dispatch
 
 jobs:
   build:
@@ -25,7 +25,10 @@ jobs:
         run: |
           python data_updater/download_google.py
       - name: show results
-        run: echo "Finished"
+        run: |
+          echo "Finished Python"
+          git status 
+          echo "Running Git"
       - name: Commit changes
         uses: EndBug/add-and-commit@v7
         with:
