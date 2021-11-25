@@ -1,5 +1,4 @@
 from .server import app, server
-from .addInsightsLayouts import *
 from .facebookLayout import *
 from .googleMobilityLayout import *
 
@@ -13,7 +12,6 @@ app.layout = html.Div(style={'margin':20}, children = [
 		))),
     dcc.Tabs([
         dcc.Tab(label='Google Mobility Data', children=googleLayout),
-        dcc.Tab(label='Traffic Data (AddInsights)', children=addInsightsLayout),
         dcc.Tab(label='Facebook Mobility Data', children=facebookLayout),
     ]),
     html.Hr(),
