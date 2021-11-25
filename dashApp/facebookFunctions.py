@@ -9,8 +9,9 @@ from .params import here
 # Loading in Facebook Data
 ###############################################################################################################################
 
-fake_data = pd.read_csv(here+'/data/FB_sample_data.csv')
 fake = False  # Use when debugging to avoid calling the server constantly.
+if fake:
+	fake_data = pd.read_csv(here+'/data/FB_sample_data.csv')
 
 import pyodbc, json
 with open(here+'/data/server_credentials.json', 'r') as f:

@@ -2,8 +2,8 @@ from .server import app
 
 # Import Dash components
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+
+from dash import html, dcc
 from textwrap import dedent as d
 from numpy import empty # For writing markdown text
 import plotly.express as px

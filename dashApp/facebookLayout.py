@@ -2,8 +2,7 @@ from .server import app
 
 # Import Dash components
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import html, dcc
 from textwrap import dedent as d # For writing markdown text
 import plotly.graph_objs as go
 import plotly.express as px
@@ -229,7 +228,7 @@ def run_risk_estimate(n_clicks, time_option, state, locations_FB, start_date, en
 			return -1
 
 
-@app.callback(Output('choropleth_FB', 'figure'), Input('risk_estimate_variable_FB', 'children'), Input('show_outbreak_centres_FB', 'value'), Input('show_low_flow_FB', 'value'), state = [State('state', 'value'), State('locations_FB','value')])
+@app.callback(Output('choropleth_FB', 'figure'), Input('risk_estimate_variable_FB', 'children'), Input('show_outbreak_centres_FB', 'value'), Input('show_low_flow_FB', 'value'), State('state', 'value'), State('locations_FB','value'))
 def update_choropleth_FB(risk_estimate, show_outbreak_centres_FB, show_low_flow_FB, state, locations_FB):
 	if risk_estimate and (risk_estimate != -1):
 		# Load in risk estimate
@@ -295,7 +294,7 @@ def update_choropleth_FB(risk_estimate, show_outbreak_centres_FB, show_low_flow_
 
 
 # High risk location callback
-@app.callback(Output('high_risk_areas_FB', 'figure'), Input('risk_estimate_variable_FB', 'children'), Input('show_outbreak_centres_FB', 'value'), Input('show_low_flow_FB', 'value'),state = [State('state', 'value'), State('locations_FB','value')]) 
+@app.callback(Output('high_risk_areas_FB', 'figure'), Input('risk_estimate_variable_FB', 'children'), Input('show_outbreak_centres_FB', 'value'), Input('show_low_flow_FB', 'value'),State('state', 'value'), State('locations_FB','value')) 
 def update_high_risk_areas_FB(risk_estimate, show_outbreak_centres_FB, show_low_flow_FB, state, locations_FB):
 	if risk_estimate and (risk_estimate != -1):
 		risk_estimate = json.loads(risk_estimate)
@@ -326,8 +325,7 @@ def update_high_risk_areas_FB(risk_estimate, show_outbreak_centres_FB, show_low_
 
 
 # Download CSV on Button Press
-@app.callback( Output("download_div_FB", "data"), Input("download_button_FB", "n_clicks"), 
-               state=[State('risk_estimate_variable_FB', 'children'), State('state', 'value')])
+@app.callback( Output("download_div_FB", "data"), Input("download_button_FB", "n_clicks"), State('risk_estimate_variable_FB', 'children'), State('state', 'value'))
 def generate_csv(n_clicks, risk_estimate_variable_FB, state):
 	if risk_estimate_variable_FB:
 		risk_estimate = json.loads(risk_estimate_variable_FB)
